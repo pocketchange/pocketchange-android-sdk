@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <size
+        android:height="5dp"
+        android:width="5dp"
+        ></size>
+    <solid
+        android:color="@color/pc_installer_permission_prompt_list_marker_color"
+    />
+</shape>

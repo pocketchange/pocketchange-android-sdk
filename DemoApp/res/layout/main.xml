@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/demo_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/useButton"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="takeTurn"
+        android:text="@string/take_turn" />
+	
+</RelativeLayout>

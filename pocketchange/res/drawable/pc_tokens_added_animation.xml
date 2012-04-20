@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="true">
+    
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_added_tokens_container" android:duration="200" />
+<item android:drawable="@drawable/pc_tokens_container" android:duration="200" />
+
+
+</animation-list>

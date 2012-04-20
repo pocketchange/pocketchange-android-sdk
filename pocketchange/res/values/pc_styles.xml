@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pc_installer_permission_prompt_list_marker_color">#ffffff</color>
+    <color name="pc_installer_permission_prompt_default_text_color">#f3f3f3</color>
+    <color name="pc_installer_permission_prompt_light_text_color">#ffffff</color>
+    <color name="pc_installer_permission_prompt_dark_text_color">#bebebe</color>
+    <color name="pc_installer_permission_prompt_light_divider_color">#44484d</color>
+    <color name="pc_installer_permission_prompt_dark_divider_color">#1f2021</color>
+    <dimen name="pc_installer_permission_prompt_text_size">18sp</dimen>
+    <dimen name="pc_installer_permission_prompt_half_text_size">9sp</dimen>
+    <dimen name="pc_installer_permission_prompt_small_text_size">14sp</dimen>
+
+    <style name="PCInstallerPermissionPromptText">
+        <item name="android:textSize">@dimen/pc_installer_permission_prompt_text_size</item>
+        <item name="android:textColor">@color/pc_installer_permission_prompt_default_text_color</item>
+    </style>
+    <style name="PCInstallerPermissionPromptButton" parent="@style/PCInstallerPermissionPromptText">
+	    <item name="android:background">@android:color/transparent</item>
+	    <item name="android:paddingTop">10dp</item>
+	    <item name="android:paddingBottom">10dp</item>
+	    <item name="android:layout_width">wrap_content</item>
+	    <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

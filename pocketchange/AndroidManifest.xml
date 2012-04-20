@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2012 Lunch Money Inc.
+ *
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.pocketchange.android">
+    <uses-sdk android:minSdkVersion="7" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
+    <application>
+        <activity
+            android:name="com.pocketchange.android.BankActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        </activity>
+        <activity
+            android:name="com.pocketchange.android.installer.AppInstallActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+        <activity
+            android:name="com.pocketchange.android.installer.AcceptPermissionsActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+        <activity
+            android:name="com.pocketchange.android.purchasing.client.PurchasingActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+
+        <service android:name="com.pocketchange.android.purchasing.client.PurchasingReceiverService" />
+        <receiver android:name="com.pocketchange.android.purchasing.client.PurchasingReceiver">
+            <intent-filter>
+                <action android:name="com.pocketchange.android.purchasing.PURCHASING_SUPPORTED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
