@@ -20,7 +20,6 @@ public class DemoApp extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         PocketChange.initialize(getApplicationContext(), APP_ID);
-        PocketChange.displayTokenCounter(this);
         //PocketChange.enableDebug();
     }
     
@@ -43,6 +42,17 @@ public class DemoApp extends Activity {
     
     public void onDestroy() {
         super.onDestroy();
-        PocketChange.removeTokenCounter(this);
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+        PocketChange.displayTokenCounter(this);
+    }
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+        PocketChange.removeTokenCounter(this);    	
     }
 }
