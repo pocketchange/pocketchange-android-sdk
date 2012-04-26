@@ -185,4 +185,4 @@ release your app to the store, otherwise transactions will not go through.**
 [2]: http://www.eclipse.org/downloads/
 [3]: http://developer.android.com/sdk/index.html
 [4]: http://developer.android.com/sdk/eclipse-adt.html
-[5]: https://github.com/pocketchange/pocketchange-android-sdk/blob/master/README-Unity.md
+[5]: https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin/blob/master/README.md
