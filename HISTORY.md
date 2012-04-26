@@ -1,3 +1,17 @@
+## 3.0.4 (2012-04-26)
+
+* Minor bug fixes for installer
+
+## 3.0.3 (2012-04-23)
+
+* Updated demo app to match README
+* Added heartbeat ping
+
+## 3.0.2 (2012-04-??)
+
+* Changed to binary distribution
+* Improved stability of installer and purchasing activities
+
 ## 3.0.1 (2012-04-05)
 
 * Changed name of PC Store
