@@ -5,6 +5,3 @@
 *.swp
 bin/
 gen/
-DemoApp/proguard/*
-pocketchange/res/raw/settings
-pocketchange/tmp
