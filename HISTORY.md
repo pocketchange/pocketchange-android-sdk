@@ -1,3 +1,8 @@
+## 4.0.0 (2012-05-08)
+
+* Substantial improvements to client-server synchronization
+* Fixed bug in offer redemption UI
+
 ## 3.0.4 (2012-04-26)
 
 * Minor bug fixes for installer
@@ -7,7 +12,7 @@
 * Updated demo app to match README
 * Added heartbeat ping
 
-## 3.0.2 (2012-04-??)
+## 3.0.2 (2012-04-18)
 
 * Changed to binary distribution
 * Improved stability of installer and purchasing activities
