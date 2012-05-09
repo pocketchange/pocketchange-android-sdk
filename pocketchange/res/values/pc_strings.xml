@@ -3,6 +3,10 @@
     <string name="pc_token_counter_container">Token Counter Container</string>
     <string name="pc_image">PC Image</string>
     
+    <string name="pc_bank_network_error_dialog_message">Error connecting to the server. Please check your network settings and try again.</string>
+    <string name="pc_bank_insufficient_tokens_dialog_message">You must buy more tokens to play!</string>
+    <string name="pc_bank_loading_dialog_message">Loading...</string>
+    
     <string name="pc_installer_no_accounts_dialog_title">No Accounts Available</string>
     <string name="pc_installer_no_accounts_dialog_message">You do not have any accounts capable of downloading the application.</string>
     <string name="pc_installer_no_accounts_dialog_ok_button">OK</string>

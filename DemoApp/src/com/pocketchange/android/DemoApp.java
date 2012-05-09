@@ -4,55 +4,38 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.pocketchange.android.R;
 
 public class DemoApp extends Activity {
-	
-	private final String TAG = this.getClass().getSimpleName();	
 	private static final String APP_ID = "test";	
 	
-	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        PocketChange.initialize(getApplicationContext(), APP_ID);
-        //PocketChange.enableDebug();
+        PocketChange.initializeInTestMode(getApplicationContext(), APP_ID);
     }
-    
-    public void takeTurn(View view) {
-      Log.i(TAG, "taking turn"); 
 
-      if (PocketChange.canPlay()) {
-          PocketChange.takeTurn();
-      }else {
-          new AlertDialog.Builder(this)
-            .setMessage("You must buy more tokens to play!")
-            .setCancelable(true)
-            .setNeutralButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int whichButton){}
-                })
-          .show();
-      }
-    }
-    
-    public void onDestroy() {
-        super.onDestroy();
-    }
-    
     @Override
     public void onResume() {
-    	super.onResume();
+        super.onResume();
         PocketChange.displayTokenCounter(this);
     }
     
     @Override
     public void onPause() {
-    	super.onPause();
-        PocketChange.removeTokenCounter(this);    	
+        super.onPause();
+        PocketChange.removeTokenCounter(this);      
+    }
+
+    public void startGame(final View view) {
+      if (PocketChange.takeTurn()) {
+          // Note: Ordinarily, this block should actually start a game instead
+          // of showing a toast.
+          Toast.makeText(this, "Starting game", Toast.LENGTH_SHORT).show();
+      }
     }
 }

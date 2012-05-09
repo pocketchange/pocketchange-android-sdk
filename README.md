@@ -83,16 +83,16 @@ Finally, declare the application components the SDK requires inside of the &lt;a
 
 ## Step 6: Integrate the SDK in your app
 
-First import the Pocket Change package in your main Activity.
+First import the Pocket Change SDK in your main Activity.
 
 ```java
-import com.pocketchange.android.*;
+import com.pocketchange.android.PocketChange;
 ```
 
 Next initialize the SDK in the main Activity's onCreate() method.
 
 ```java
-PocketChange.initialize(getApplicationContext(), APP_ID);
+PocketChange.initialize(this, APP_ID);
 ```
 
 Use the supplied token counter UI code which displays the number of tokens in the player's account. To show the counter in the upper right corner in your activity:
@@ -117,20 +117,25 @@ The display method also takes left and top margins as arguments to show the coun
 PocketChange.displayTokenCounter(this, 20, 40);
 ```
 
-When a user takes a turn, call the following method. Your account manager can set the number of tokens per turn on the server.
+Before starting a turn, call:
 
 ```java
-PocketChange.takeTurn();
+PocketChange.takeTurn()
 ```
 
-The SDK also provides a way to check if the player can continue playing. The following method will check if the user has enough tokens for a turn OR if the game has been unlocked.
+The `takeTurn` method will return true if the user's account was successfully debited for the number of tokens required to play, in which case you should begin the turn. If the method returns false, do not perform any action; the SDK will automatically render appropriate UI components informing the user that more tokens are required and offering the option to purchase tokens.
+
+As users may add funds to their accounts at any time, and I/O callbacks can be difficult to manage due to Android's Activity lifecycle, we recommend calling `takeTurn` from a button click listener; for example:
 
 ```java
-PocketChange.canPlay();
+public void startGame(View view) {
+    if (PocketChange.takeTurn()) {
+        // begin the game
+    }
+}
 ```
 
-If you would like to add any events when our SDK successfully contacts the server or experiences a connection failure, please add a custom
-listener:
+If you would like to add any events when our SDK successfully contacts the server or experiences a connection failure, please add a custom listener:
 
 ```java
 PocketChange.addListener(new PCListener() {
