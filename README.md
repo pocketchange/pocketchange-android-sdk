@@ -117,23 +117,15 @@ The display method also takes left and top margins as arguments to show the coun
 PocketChange.displayTokenCounter(this, 20, 40);
 ```
 
-Before starting a turn, call:
+When the user triggers a UI event to start the game, call:
 
 ```java
-PocketChange.takeTurn()
+if (PocketChange.takeTurn()) {
+  // begin the game
+}
 ```
 
 The `takeTurn` method will return true if the user's account was successfully debited for the number of tokens required to play, in which case you should begin the turn. If the method returns false, do not perform any action; the SDK will automatically render appropriate UI components informing the user that more tokens are required and offering the option to purchase tokens.
-
-As users may add funds to their accounts at any time, and I/O callbacks can be difficult to manage due to Android's Activity lifecycle, we recommend calling `takeTurn` from a button click listener; for example:
-
-```java
-public void startGame(View view) {
-    if (PocketChange.takeTurn()) {
-        // begin the game
-    }
-}
-```
 
 If you would like to add any events when our SDK successfully contacts the server or experiences a connection failure, please add a custom listener:
 
