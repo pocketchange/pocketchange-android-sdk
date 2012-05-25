@@ -43,10 +43,11 @@ Open the properties window for your app (File » Properties » Android), press t
 <a name="readme-android-manifest-modifications"></a>
 ## Step 5: Modify your AndroidManifest.xml
 
-If your manifest file does not already include the permissions to make network calls, access and use account information, and read telephony state, add them inside the &lt;mainifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device id.
+If your manifest file does not already include the permissions to make network calls, access, manage, and use account information, and read telephony state, add them inside the &lt;mainifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device id.
 
 ```xml
 <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
+<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"></uses-permission>
 <uses-permission android:name="android.permission.USE_CREDENTIALS"></uses-permission>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
@@ -61,17 +62,34 @@ Finally, declare the application components the SDK requires inside of the &lt;a
     android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
 </activity>
 <activity
+    android:name="com.pocketchange.android.installer.AcceptPermissionsActivity"
+    android:theme="@android:style/Theme.NoTitleBar">
+</activity>
+<activity
     android:name="com.pocketchange.android.installer.AppInstallActivity"
     android:theme="@android:style/Theme.NoTitleBar">
 </activity>
 <activity
-    android:name="com.pocketchange.android.installer.AcceptPermissionsActivity"
+    android:name="com.pocketchange.android.installer.BackgroundAppInstallActivity"
     android:theme="@android:style/Theme.NoTitleBar">
 </activity>
 <activity
     android:name="com.pocketchange.android.purchasing.client.PurchasingActivity"
     android:theme="@android:style/Theme.NoTitleBar">
 </activity>
+
+<service android:name="com.pocketchange.android.installer.AppInstallService" />
+<receiver android:name="com.pocketchange.android.installer.AppInstallService$AccountsChangedBroadcastReceiver">
+    <intent-filter>
+        <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
+    </intent-filter>
+</receiver>
+<receiver android:name="com.pocketchange.android.installer.AppInstallService$AppInstalledBroadcastReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.PACKAGE_ADDED" />
+        <data android:scheme="package" />
+    </intent-filter>
+</receiver>
 
 <service android:name="com.pocketchange.android.purchasing.client.PurchasingReceiverService" />
 <receiver android:name="com.pocketchange.android.purchasing.client.PurchasingReceiver">
@@ -83,19 +101,21 @@ Finally, declare the application components the SDK requires inside of the &lt;a
 
 ## Step 6: Integrate the SDK in your app
 
-First import the Pocket Change SDK in your main Activity.
+First import the Pocket Change SDK in your main Activity:
 
 ```java
 import com.pocketchange.android.PocketChange;
 ```
 
-Next initialize the SDK in the main Activity's onCreate() method.
+Next initialize the SDK in the main Activity's onCreate() method:
 
 ```java
 PocketChange.initialize(this, APP_ID);
 ```
 
-Use the supplied token counter UI code which displays the number of tokens in the player's account. To show the counter in the upper right corner in your activity:
+You must call the `PocketChange.initialize` method in the `onCreate` method of every Activity that uses the SDK before calling any other SDK methods. Do not worry about duplicate initialization; the SDK automatically prevents it.
+ 
+Use the supplied token counter UI code which displays the number of tokens in the player's account. To show the counter in the upper right corner in your Activity:
 
 ```java
 @Override
@@ -111,11 +131,13 @@ public void onPause() {
 }
 ```
 
-The display method also takes left and top margins as arguments to show the counter in a particular location.
+The `displayTokenCounter` method also takes left and top margins as arguments to show the counter in a particular location:
 
 ```java
 PocketChange.displayTokenCounter(this, 20, 40);
 ```
+
+The SDK ensures that the counter will only appear once in each Activity.
 
 When the user triggers a UI event to start the game, call:
 
@@ -172,7 +194,7 @@ the interface.
 You can use test mode to try out your integration in a safe environment. Transactions will not by processed by your credit card provider and you can use the following test CC credentials: #4242424242424242 CVC: 999 Exp: 12/2013. To enable test mode replace your initialize statement with:
 
 ```java
-PocketChange.initializeInTestMode(getApplicationContext(), APP_ID);
+PocketChange.initializeInTestMode(this, APP_ID);
 ```
 
 Note: when the bank comes up there will be a banner indicating that you're in a test environment. **You must change the initialize call back before you

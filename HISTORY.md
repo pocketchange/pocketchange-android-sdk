@@ -1,3 +1,8 @@
+## 4.1.0 (2012-05-25)
+
+* Added background installer
+* Improved API request performance
+
 ## 4.0.0 (2012-05-08)
 
 * Substantial improvements to client-server synchronization

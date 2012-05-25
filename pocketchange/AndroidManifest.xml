@@ -8,6 +8,7 @@
     <uses-sdk android:minSdkVersion="7" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"></uses-permission>
     <uses-permission android:name="android.permission.USE_CREDENTIALS"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
@@ -19,17 +20,34 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         </activity>
         <activity
+            android:name="com.pocketchange.android.installer.AcceptPermissionsActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+        <activity
             android:name="com.pocketchange.android.installer.AppInstallActivity"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity
-            android:name="com.pocketchange.android.installer.AcceptPermissionsActivity"
+            android:name="com.pocketchange.android.installer.BackgroundAppInstallActivity"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity
             android:name="com.pocketchange.android.purchasing.client.PurchasingActivity"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+
+        <service android:name="com.pocketchange.android.installer.AppInstallService" />
+        <receiver android:name="com.pocketchange.android.installer.AppInstallService$AccountsChangedBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.pocketchange.android.installer.AppInstallService$AppInstalledBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
 
         <service android:name="com.pocketchange.android.purchasing.client.PurchasingReceiverService" />
         <receiver android:name="com.pocketchange.android.purchasing.client.PurchasingReceiver">
