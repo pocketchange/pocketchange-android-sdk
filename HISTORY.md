@@ -1,3 +1,11 @@
+## 4.2.0 (2012-06-05)
+
+* Added support for products
+
+## 4.1.1 (2012-05-29)
+
+* Improved stability of purchasing UI components
+
 ## 4.1.0 (2012-05-25)
 
 * Added background installer
