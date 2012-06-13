@@ -43,7 +43,7 @@ Open the properties window for your app (File » Properties » Android), press t
 <a name="readme-android-manifest-modifications"></a>
 ## Step 5: Modify your AndroidManifest.xml
 
-If your manifest file does not already include the permissions to make network calls, access, manage, and use account information, and read telephony state, add them inside the &lt;mainifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device id.
+If your manifest file does not already include the permissions to make network calls, access, manage, and use account information, and read telephony state, add them inside the &lt;mainifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device ID.
 
 ```xml
 <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
@@ -51,6 +51,7 @@ If your manifest file does not already include the permissions to make network c
 <uses-permission android:name="android.permission.USE_CREDENTIALS"></uses-permission>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 ```
 
 Finally, declare the application components the SDK requires inside of the &lt;application&gt; block:
@@ -90,6 +91,8 @@ Finally, declare the application components the SDK requires inside of the &lt;a
         <data android:scheme="package" />
     </intent-filter>
 </receiver>
+
+<service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
 
 <service android:name="com.pocketchange.android.purchasing.client.PurchasingReceiverService" />
 <receiver android:name="com.pocketchange.android.purchasing.client.PurchasingReceiver">
@@ -199,6 +202,13 @@ PocketChange.initializeInTestMode(this, APP_ID);
 
 Note: when the bank comes up there will be a banner indicating that you're in a test environment. **You must change the initialize call back before you
 release your app to the store, otherwise transactions will not go through.**
+
+
+## In-app Billing Build Instructions
+
+If your application uses Google in-app billing, it may fail to build after you've added the SDK due to a duplicate definition of the com.android.vending.billing.IMarketBillingService interface. To resolve such build errors, remove the IMarketBillingService.aidl file from your project and use the compiled version of the service provided by the SDK. The SDK contains the latest version of the IMarketBillingService interface, which should be backwards-compatible with all previous versions and interoperable with your application.
+
+In order to give you full control over the in-app billing library dependency, the SDK includes the in-app billing service classes as a standalone JAR file (libs/com-android-vending-billing.jar). You can provide a replacement for this library JAR, but we strongly recommend against such an approach, as incorrect obfuscation settings in your application may produce run-time linkage errors which can be difficult to detect during testing.
 
 [1]: http://dl.dropbox.com/u/68268326/sdk-doc-images/add_library_dialog.png
 [2]: http://www.eclipse.org/downloads/
