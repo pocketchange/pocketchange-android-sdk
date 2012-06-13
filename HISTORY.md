@@ -1,3 +1,8 @@
+## 4.2.1 (2012-06-13)
+
+* Fixed bugs in pause/resume logic for fragment UI components
+* Implemented asynchronous request batching to improve network performance and minimize battery drain
+
 ## 4.2.0 (2012-06-05)
 
 * Added support for products
