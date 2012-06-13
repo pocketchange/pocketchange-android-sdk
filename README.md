@@ -208,8 +208,6 @@ release your app to the store, otherwise transactions will not go through.**
 
 If your application uses Google in-app billing, it may fail to build after you've added the SDK due to a duplicate definition of the com.android.vending.billing.IMarketBillingService interface. To resolve such build errors, remove the IMarketBillingService.aidl file from your project and use the compiled version of the service provided by the SDK. The SDK contains the latest version of the IMarketBillingService interface, which should be backwards-compatible with all previous versions and interoperable with your application.
 
-In order to give you full control over the in-app billing library dependency, the SDK includes the in-app billing service classes as a standalone JAR file (libs/com-android-vending-billing.jar). You can provide a replacement for this library JAR, but we strongly recommend against such an approach, as incorrect obfuscation settings in your application may produce run-time linkage errors which can be difficult to detect during testing.
-
 [1]: http://dl.dropbox.com/u/68268326/sdk-doc-images/add_library_dialog.png
 [2]: http://www.eclipse.org/downloads/
 [3]: http://developer.android.com/sdk/index.html
