@@ -203,6 +203,7 @@ PocketChange.initializeInTestMode(this, APP_ID);
 Note: when the bank comes up there will be a banner indicating that you're in a test environment. **You must change the initialize call back before you
 release your app to the store, otherwise transactions will not go through.**
 
+Viewing your data can be done in the developer dashboard: [Documentation](https://github.com/pocketchange/pocketchange-android-sdk/wiki/Development)
 
 ## In-app Billing Build Instructions
 
