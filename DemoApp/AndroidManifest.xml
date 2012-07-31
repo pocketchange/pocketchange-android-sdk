@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      android:versionCode="1"
-      android:versionName="1.0" package="com.pocketchange.android">
-    <uses-sdk android:minSdkVersion="7" />
+    package="com.pocketchange.android.sdkdemo"
+    android:versionCode="1"
+    android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16" />
     
+    <!-- Pocket Change SDK permissions  -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"></uses-permission>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!-- End Pocket Change SDK permissions  -->
     
     <application
         android:icon="@drawable/icon" 
         android:label="@string/app_name">
-        <activity android:name="com.pocketchange.android.DemoApp"
+        <activity android:name="com.pocketchange.android.sdkdemo.DemoActivity"
                   android:label="@string/app_name"
-				  android:configChanges="orientation|keyboardHidden"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,48 +24,32 @@
             </intent-filter>
         </activity>
 
+        <!-- Pocket Change SDK rewards components  -->
         <activity
-            android:name="com.pocketchange.android.BankActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            android:name="com.pocketchange.android.rewards.RewardGrantedActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask">
         </activity>
         <activity
-            android:name="com.pocketchange.android.installer.AcceptPermissionsActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:name="com.pocketchange.android.rewards.ShopActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask">
         </activity>
         <activity
-            android:name="com.pocketchange.android.installer.AppInstallActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:name="com.pocketchange.android.rewards.WelcomeActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask">
         </activity>
-        <activity
-            android:name="com.pocketchange.android.installer.BackgroundAppInstallActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-        <activity
-            android:name="com.pocketchange.android.purchasing.client.PurchasingActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-
-        <service android:name="com.pocketchange.android.installer.AppInstallService" />
-        <receiver android:name="com.pocketchange.android.installer.AppInstallService$AccountsChangedBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.pocketchange.android.installer.AppInstallService$AppInstalledBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
 
         <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
-
-        <service android:name="com.pocketchange.android.purchasing.client.PurchasingReceiverService" />
-        <receiver android:name="com.pocketchange.android.purchasing.client.PurchasingReceiver">
+        <!-- End Pocket Change SDK rewards components  -->
+        
+        <!-- Pocket Change SDK products components  -->
+        <receiver android:name="com.pocketchange.android.ProductTransactionsReceiver">
             <intent-filter>
-                <action android:name="com.pocketchange.android.purchasing.PURCHASING_SUPPORTED" />
+                <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACTION" />
             </intent-filter>
         </receiver>
+        <!-- End Pocket Change SDK products components  -->
     </application>
 </manifest>

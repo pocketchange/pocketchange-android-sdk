@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pocket Change Demo App</string>
-    <string name="start_game">Start Game</string>
+    <string name="app_name">Pocket Change SDK Demo</string>
+    <string name="open_shop">Open Shop</string>
+    <string name="show_product_inventory">Show Inventory</string>
 </resources>

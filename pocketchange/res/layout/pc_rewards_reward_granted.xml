@@ -1,0 +1,161 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#7F000000">
+
+    <!-- Banner -->
+    <ImageView
+        android:id="@+id/pc_rewards_reward_granted_banner"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/pc_rewards_reward_granted_banner_height"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/pc_rewards_reward_granted_banner" />
+    <!-- /Banner -->
+
+    <!-- App icon -->
+    <ImageView
+        android:id="@+id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_width="@dimen/pc_rewards_reward_granted_app_icon_inset_width"
+        android:layout_height="@dimen/pc_rewards_reward_granted_app_icon_inset_height"
+        android:layout_alignTop="@id/pc_rewards_reward_granted_banner"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_app_icon_inset_margin_top"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_app_icon_inset_margin_left"
+        android:scaleType="centerInside"
+        android:src="@drawable/pc_rewards_reward_granted_app_icon_inset" />
+    <ImageView
+        android:id="@+id/pc_rewards_reward_granted_app_icon"
+        android:layout_width="@dimen/pc_rewards_reward_granted_app_icon_inset_width"
+        android:layout_height="@dimen/pc_rewards_reward_granted_app_icon_inset_height"
+        android:layout_alignTop="@id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_alignLeft="@id/pc_rewards_reward_granted_app_icon_inset"
+        android:paddingTop="@dimen/pc_rewards_reward_granted_app_icon_vertical_spacing_from_inset"
+        android:paddingLeft="@dimen/pc_rewards_reward_granted_app_icon_horizontal_spacing_from_inset"
+        android:paddingBottom="@dimen/pc_rewards_reward_granted_app_icon_vertical_spacing_from_inset"
+        android:paddingRight="@dimen/pc_rewards_reward_granted_app_icon_horizontal_spacing_from_inset"
+        android:scaleType="centerInside" />
+    <!-- /App icon -->
+
+    <!-- App name -->
+    <TextView
+        android:id="@+id/pc_rewards_reward_granted_app_name"
+        style="@style/PCRewardsDialogText"
+        android:layout_width="@dimen/pc_rewards_reward_granted_reward_description_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_toRightOf="@+id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_app_name_margin_top"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_app_name_margin_left"
+        android:singleLine="true" 
+        android:scrollHorizontally="false"
+        android:ellipsize="end"
+        android:textSize="@dimen/pc_rewards_reward_granted_app_name_text_size"
+        android:textStyle="italic" />
+    <!-- /App name -->
+
+    <!-- Reward name -->
+    <TextView
+        android:id="@+id/pc_rewards_reward_granted_reward_name"
+        style="@style/PCRewardsDialogText"
+        android:layout_width="@dimen/pc_rewards_reward_granted_reward_description_width"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_toRightOf="@+id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_reward_name_margin_left"
+        android:layout_marginBottom="@dimen/pc_rewards_reward_granted_reward_name_margin_bottom"
+        android:singleLine="true" 
+        android:scrollHorizontally="false"
+        android:ellipsize="end"
+        android:textSize="@dimen/pc_rewards_reward_granted_reward_name_text_size" />
+    <!-- /Reward name -->
+
+    <!-- Close button -->
+    <Button
+        android:id="@+id/pc_rewards_reward_granted_close_button"
+        android:layout_width="@dimen/pc_rewards_reward_granted_button_width"
+        android:layout_height="@dimen/pc_rewards_reward_granted_button_height"
+        android:layout_alignLeft="@id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_below="@id/pc_rewards_reward_granted_app_icon_inset"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_close_button_margin_top"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_close_button_margin_left"
+        android:gravity="center"
+        android:background="@drawable/pc_rewards_reward_granted_close_button_bg" 
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/pc_rewards_reward_granted_button_text_size"
+        android:textStyle="bold"
+        android:onClick="close" />
+    <!-- /Close button -->
+
+    <!-- Shop button -->
+    <Button
+        android:id="@+id/pc_rewards_reward_granted_shop_button"
+        android:layout_width="@dimen/pc_rewards_reward_granted_button_width"
+        android:layout_height="@dimen/pc_rewards_reward_granted_button_height"
+        android:layout_alignTop="@id/pc_rewards_reward_granted_close_button"
+        android:layout_toRightOf="@id/pc_rewards_reward_granted_close_button"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_shop_button_margin_left"
+        android:paddingLeft="@dimen/pc_rewards_reward_granted_shop_button_padding_horizontal"
+        android:paddingRight="@dimen/pc_rewards_reward_granted_shop_button_padding_horizontal"
+        android:drawablePadding="@dimen/pc_rewards_reward_granted_shop_button_drawable_padding"
+        android:gravity="center"
+        android:background="@drawable/pc_rewards_reward_granted_shop_button_bg" 
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/pc_rewards_reward_granted_button_text_size"
+        android:textStyle="bold"
+        android:onClick="openShop" />
+    <!-- /Shop button -->
+
+    <!-- Coin -->
+    <ImageView
+        android:id="@+id/pc_rewards_reward_granted_coin"
+        android:layout_width="@dimen/pc_rewards_reward_granted_coin_width"
+        android:layout_height="@dimen/pc_rewards_reward_granted_coin_height"
+        android:layout_alignTop="@id/pc_rewards_reward_granted_banner"
+        android:layout_alignRight="@id/pc_rewards_reward_granted_banner"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_coin_margin_top"
+        android:layout_marginRight="@dimen/pc_rewards_reward_granted_coin_margin_right"
+        android:scaleType="centerInside"
+        android:src="@drawable/pc_rewards_reward_granted_coin" />
+    
+    <ImageView
+        android:layout_width="@dimen/pc_rewards_reward_granted_plus_symbol_width"
+        android:layout_height="@dimen/pc_rewards_reward_granted_plus_symbol_height"
+        android:layout_alignTop="@id/pc_rewards_reward_granted_coin"
+        android:layout_alignLeft="@id/pc_rewards_reward_granted_coin"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_plus_symbol_margin_top"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_plus_symbol_margin_left"
+        android:scaleType="centerInside"
+        android:src="@drawable/pc_rewards_reward_granted_plus_symbol" />
+
+    <TextView
+        android:id="@+id/pc_rewards_reward_granted_reward_amount"
+        style="@style/PCRewardsDialogText"
+        android:layout_width="@dimen/pc_rewards_reward_granted_reward_amount_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/pc_rewards_reward_granted_coin"
+        android:layout_alignLeft="@id/pc_rewards_reward_granted_coin"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_reward_amount_margin_top"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_reward_amount_margin_left"
+        android:includeFontPadding="false"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/pc_rewards_reward_granted_reward_amount_text_size"
+        android:textStyle="bold" />
+    <!-- /Coin -->
+
+    <!-- Pocket Change text -->
+    <TextView
+        android:id="@+id/pc_rewards_reward_granted_pocket_change_text"
+        style="@style/PCRewardsDialogText"
+        android:layout_width="@dimen/pc_rewards_reward_granted_pocket_change_text_width"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/pc_rewards_reward_granted_coin"
+        android:layout_below="@id/pc_rewards_reward_granted_coin"
+        android:layout_marginTop="@dimen/pc_rewards_reward_granted_pocket_change_text_margin_top"
+        android:layout_marginLeft="@dimen/pc_rewards_reward_granted_pocket_change_text_margin_left"
+        android:gravity="center_horizontal"
+        android:lineSpacingMultiplier="@dimen/pc_rewards_reward_granted_pocket_change_text_line_spacing_multiplier"
+        android:lineSpacingExtra="@dimen/pc_rewards_reward_granted_pocket_change_text_line_spacing_extra"
+        android:textSize="@dimen/pc_rewards_reward_granted_pocket_change_text_text_size"
+        android:textStyle="bold" />
+    <!-- /Pocket Change text -->
+</RelativeLayout>

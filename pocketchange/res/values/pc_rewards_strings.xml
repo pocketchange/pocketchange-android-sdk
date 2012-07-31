@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pc_rewards_pocket_change_allcaps">POCKET CHANGE</string>
+    <string name="pc_rewards_welcome_welcome_to">WELCOME TO</string>
+    <string name="pc_rewards_reward_granted_app_name">from %s</string>
+    <string name="pc_rewards_reward_granted_close">CLOSE</string>
+    <string name="pc_rewards_reward_granted_shop">SHOP</string>
+    <string name="pc_rewards_shop_loading">Loading...</string>
+    <string name="pc_rewards_shop_error_dialog_title">Error</string>
+    <string name="pc_rewards_shop_error_dialog_message">There was an error loading the shop. Typically, such errors occur due to network connectivity issues. Would you like to retry?</string>
+    <string name="pc_rewards_shop_error_dialog_retry_button">Retry</string>
+    <string name="pc_rewards_shop_error_dialog_cancel_button">Cancel</string>
+</resources>

@@ -1,3 +1,9 @@
+## 5.0.0 (2012-07-30)
+
+* Added support for rewards
+* Removed token-based play
+* Removed consumable products
+
 ## 4.2.1 (2012-06-13)
 
 * Fixed bugs in pause/resume logic for fragment UI components
