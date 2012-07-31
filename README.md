@@ -41,7 +41,7 @@ Open the properties window for your app (File » Properties » Android), press t
 <a name="readme-android-manifest-modifications"></a>
 ## Step 5: Modify your AndroidManifest.xml
 
-If your manifest file does not already include the permissions to connect to the internet, access network state, obtain account information, and read telephony state, add them inside the &lt;mainifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device ID.
+If your manifest file does not already include the permissions to connect to the internet, access network state, obtain account information, and read telephony state, add them inside the &lt;manifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device ID.
 
 ```xml
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
@@ -87,7 +87,7 @@ PocketChange.initialize(this, APP_ID);
 ```
 
 ### Update Your ProGuard Configuration
-If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in pocketchange/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
+If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in sdk/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
 
 In cases where your application contains a conflicting or duplicate obfuscation setting, select the most permissive combination of settings. For example, if your proguard.cfg file contains:
 
