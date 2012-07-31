@@ -32,7 +32,7 @@ To reference the Pocket Change SDK you must import the Android library project i
 
 On the following screen, select the directory containing the SDK project that you downloaded in step 2, and Eclipse should automatically infer the project name and structure:
 
-<img src="http://dl.dropbox.com/u/68268326/sdk-doc-images/import_project_dialog_step2.png" alt="Import Project, Step 2" width="525" height="617" />
+<img src="http://dl.dropbox.com/u/68268326/sdk-doc-images/import_project_dialog_step2.png" alt="Import Project, Step 2" width="525" height="619" />
 
 ## Step 4: Add a reference to the Pocket Change SDK
 
