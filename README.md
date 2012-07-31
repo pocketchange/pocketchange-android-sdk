@@ -1,14 +1,12 @@
 # Pocket Change's Android SDK.
 
-If you're using Unity go [here][5].
+If you're using Unity go <a href="https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin/blob/master/README.md">here</a>.
 
-See DemoApp for a working demo application. Follow the instructions below to integrate the SDK. 
+Follow the instructions below to integrate the SDK. For a working demo application, see the demo-app directory.
 
-Prerequisites: [Eclipse][2], [Android SDK][3] (version 17 or later), and the [Android Plugin][4] (version 17 or later).
+Prerequisites: [Eclipse][1], [Android SDK][2] (version 17 or later), and the [Android Plugin][3] (version 17 or later).
 
-**Note that version 17 of the Android SDK and Android Plugin were released in
-03/2012; if you experience build errors, please ensure that you have appropriate
-versions of these components.**
+**Note that version 17 of the Android SDK and Android Plugin were released in 03/2012; if you experience build errors, please ensure that you have appropriate versions of these components.**
 
 ## Step 1: Obtain an id for your game
 
@@ -38,7 +36,7 @@ On the following screen, select the directory containing the SDK project that yo
 
 Open the properties window for your app (File » Properties » Android), press the *Add...* button and select the pocketchange-android-sdk library.
 
-![Add Reference][1]
+<img src="http://dl.dropbox.com/u/68268326/sdk-doc-images/add_library_dialog.png" alt="Add Library Reference" width="801" height="614" />
 
 <a name="readme-android-manifest-modifications"></a>
 ## Step 5: Modify your AndroidManifest.xml
@@ -106,8 +104,6 @@ and the SDK configuration contains:
 then the merged version should use the keep directive from the SDK configuration, as the SDK preserves all classes extending AnInterface, regardless of their visibility, whereas your application only preserves public classes implementing the interface.
 
 
-[1]: http://dl.dropbox.com/u/68268326/sdk-doc-images/add_library_dialog.png
-[2]: http://www.eclipse.org/downloads/
-[3]: http://developer.android.com/sdk/index.html
-[4]: http://developer.android.com/sdk/eclipse-adt.html
-[5]: https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin/blob/master/README.md
+[1]: http://www.eclipse.org/downloads/
+[2]: http://developer.android.com/sdk/index.html
+[3]: http://developer.android.com/sdk/eclipse-adt.html
