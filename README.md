@@ -165,7 +165,7 @@ You can use test mode to validate your integration: The SDK will grant unlimited
 PocketChange.initialize(this, APP_ID, true);
 ```
 
-**You must change the initialize call back before you release your app, otherwise users will not receive real rewards.**
+**You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
 
 [1]: http://www.eclipse.org/downloads/
