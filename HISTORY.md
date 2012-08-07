@@ -1,3 +1,7 @@
+## 5.1.1 (2012-08-07)
+
+* Minor bug fix for rewards response parser
+
 ## 5.1.0 (2012-08-06)
 
 * Added hooks to control timing of rewards activity launches
