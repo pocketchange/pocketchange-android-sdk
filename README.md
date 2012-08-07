@@ -157,6 +157,17 @@ and the SDK configuration contains:
 then the merged version should use the keep directive from the SDK configuration, as the SDK preserves all classes extending AnInterface, regardless of their visibility, whereas your application only preserves public classes implementing the interface.
 
 
+## <a name="testing"></a>Testing Instructions
+
+You can use test mode to validate your integration: The SDK will grant unlimited rewards so that you can confirm your application's behavior after a reward has been granted. To enable test mode, replace your initialize statement with:
+
+```java
+PocketChange.initialize(this, APP_ID, true);
+```
+
+**You must change the initialize call back before you release your app, otherwise users will not receive real rewards.**
+
+
 [1]: http://www.eclipse.org/downloads/
 [2]: http://developer.android.com/sdk/index.html
 [3]: http://developer.android.com/sdk/eclipse-adt.html
