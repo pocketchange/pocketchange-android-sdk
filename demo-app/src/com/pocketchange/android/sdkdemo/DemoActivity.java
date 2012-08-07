@@ -7,8 +7,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.pocketchange.android.PocketChange;
 import com.pocketchange.android.R;
@@ -28,6 +30,11 @@ public class DemoActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity);
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
         // Note: The third parameter should be false or omitted for a
         // production release.
         PocketChange.initialize(this, APP_ID, true);
@@ -54,6 +61,15 @@ public class DemoActivity extends Activity {
 
     public void openShop(View view) {
         PocketChange.openShop();
+    }
+    
+    public void displayReward(View view) {
+        Intent intent = PocketChange.getDisplayRewardIntent();
+        if (intent == null) {
+            Toast.makeText(this, "No reward to display", Toast.LENGTH_LONG).show();
+        } else {
+            startActivity(intent);
+        }
     }
 
     public void showProductInventory(View view) {

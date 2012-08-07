@@ -2,5 +2,6 @@
 <resources>
     <string name="app_name">Pocket Change SDK Demo</string>
     <string name="open_shop">Open Shop</string>
+    <string name="display_reward">Display Reward</string>
     <string name="show_product_inventory">Show Inventory</string>
 </resources>

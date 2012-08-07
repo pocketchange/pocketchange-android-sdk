@@ -54,19 +54,12 @@ Finally, declare the application components the SDK requires inside of the &lt;a
 
 ```xml
         <activity
-            android:name="com.pocketchange.android.rewards.RewardGrantedActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:launchMode="singleTask">
+            android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name="com.pocketchange.android.rewards.ShopActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:launchMode="singleTask">
-        </activity>
-        <activity
-            android:name="com.pocketchange.android.rewards.WelcomeActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:launchMode="singleTask">
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         </activity>
         
         <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
@@ -74,16 +67,76 @@ Finally, declare the application components the SDK requires inside of the &lt;a
 
 ## Step 6: Integrate the SDK in your app
 
-First import the Pocket Change SDK in your main Activity:
+First import the Pocket Change SDK in your Activity subclasses:
 
 ```java
 import com.pocketchange.android.PocketChange;
 ```
 
-Next initialize the SDK in the main Activity's onCreate() method:
+Next initialize the SDK in each Activity's onStart() method:
 
 ```java
 PocketChange.initialize(this, APP_ID);
+```
+
+Do not attempt to guard against duplicate initialization, as doing so will break your integration.
+
+Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
+
+To retrieve an Intent that launches an Activity which displays the next pending notification, after invoking initialize, call:
+```java
+PocketChange.getDisplayRewardIntent();
+```
+
+The `getDisplayRewardIntent` method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time.
+
+When the SDK adds a notification to the queue, it sends a broadcast with action com.pocketchange.android.rewards.NOTIFY\_PENDING\_DISPLAY\_REWARD\_INTENT and data matching your application package's URI (i.e. package:&lt;your application package&gt;). To subscribe to these broadcasts, use the following intent filter:
+```xml
+<intent-filter>
+    <action android:name="com.pocketchange.android.rewards.NOTIFY_PENDING_DISPLAY_REWARD_INTENT" />
+    <data android:scheme="package" />
+</intent-filter>
+```
+
+Be sure to validate that the data field matches your application's package name, or you may end up responding to broadcasts intended for other applications. The following sample BroadcastReceiver automatically displays the next notification in the queue immediately upon receipt.
+
+```java
+package com.pocketchange.android.example;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
+import com.pocketchange.android.PocketChange;
+
+public class PendingRewardDisplayReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (!PocketChange.isInitialized()) {
+            return;
+        }
+        String action = intent.getAction();
+        if (action == null || !action.equals(PocketChange.ACTION_NOTIFY_PENDING_DISPLAY_REWARD_INTENT)) {
+            return;
+        }
+        Uri data = intent.getData();
+        if (data == null
+            || !data.getScheme().equals("package")
+            || !data.getSchemeSpecificPart().equals(context.getPackageName())) {
+            return;
+        }
+        Intent displayRewardIntent = PocketChange.getDisplayRewardIntent();
+        if (displayRewardIntent != null) {
+            displayRewardIntent.addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+            );
+            context.startActivity(displayRewardIntent);
+        }
+    }
+}
 ```
 
 ### Update Your ProGuard Configuration

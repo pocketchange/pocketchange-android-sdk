@@ -26,19 +26,12 @@
 
         <!-- Pocket Change SDK rewards components  -->
         <activity
-            android:name="com.pocketchange.android.rewards.RewardGrantedActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:launchMode="singleTask">
+            android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name="com.pocketchange.android.rewards.ShopActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:launchMode="singleTask">
-        </activity>
-        <activity
-            android:name="com.pocketchange.android.rewards.WelcomeActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:launchMode="singleTask">
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         </activity>
 
         <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />

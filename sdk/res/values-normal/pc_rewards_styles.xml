@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="pc_rewards_welcome_welcome_text_margin_left">@dimen/pc_rewards_welcome_welcome_text_margin_left_default</dimen>
-</resources>

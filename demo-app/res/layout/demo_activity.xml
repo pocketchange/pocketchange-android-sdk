@@ -12,6 +12,12 @@
             android:layout_height="wrap_content"
             android:text="@string/open_shop"
             android:onClick="openShop" />
+        
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/display_reward"
+            android:onClick="displayReward" />
 
         <Button
             android:layout_width="130dp"

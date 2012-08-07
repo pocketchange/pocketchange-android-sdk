@@ -1,3 +1,7 @@
+## 5.1.0 (2012-08-06)
+
+* Added hooks to control timing of rewards activity launches
+
 ## 5.0.0 (2012-07-30)
 
 * Added support for rewards
