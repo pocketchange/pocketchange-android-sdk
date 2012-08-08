@@ -35,9 +35,7 @@ public class DemoActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        // Note: The third parameter should be false or omitted for a
-        // production release.
-        PocketChange.initialize(this, APP_ID, true);
+        PocketChange.initialize(this, APP_ID);
     }
     
     @Override
