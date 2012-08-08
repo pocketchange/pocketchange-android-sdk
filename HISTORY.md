@@ -1,3 +1,7 @@
+## 5.1.2 (2012-08-08)
+
+* Added validation to guard against production releases with test mode enabled
+
 ## 5.1.1 (2012-08-07)
 
 * Minor bug fix for rewards response parser
