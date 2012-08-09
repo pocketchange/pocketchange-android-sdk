@@ -167,6 +167,8 @@ PocketChange.initialize(this, APP_ID, true);
 
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
+The SDK only works properly on real devices. Do not use emulators for testing or you will get faulty test results.
+
 
 [1]: http://www.eclipse.org/downloads/
 [2]: http://developer.android.com/sdk/index.html

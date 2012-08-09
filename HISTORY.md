@@ -1,3 +1,8 @@
+## 5.1.3 (2012-08-09)
+
+* Fixed intermittent AndroidRuntimeException caused by web view preloading
+* Minor improvements to keyboard interaction in the store
+
 ## 5.1.2 (2012-08-08)
 
 * Added validation to guard against production releases with test mode enabled
