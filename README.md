@@ -2,7 +2,7 @@
 
 If you're using Unity go <a href="https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin/blob/master/README.md">here</a>.
 
-Follow the instructions below to integrate the SDK. For a working demo application, see the demo-app directory.
+Follow the instructions below to integrate the SDK.
 
 Prerequisites: [Eclipse][1], [Android SDK][2] (version 17 or later), and the [Android Plugin][3] (version 17 or later).
 
@@ -39,6 +39,7 @@ Open the properties window for your app (File » Properties » Android), press t
 <img src="http://dl.dropbox.com/u/68268326/sdk-doc-images/add_library_dialog.png" alt="Add Library Reference" width="801" height="614" />
 
 <a name="readme-android-manifest-modifications"></a>
+
 ## Step 5: Modify your AndroidManifest.xml
 
 If your manifest file does not already include the permissions to connect to the internet, access network state, obtain account information, and read telephony state, add them inside the &lt;manifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device ID.
@@ -90,54 +91,6 @@ PocketChange.getDisplayRewardIntent();
 
 The `getDisplayRewardIntent` method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time.
 
-When the SDK adds a notification to the queue, it sends a broadcast with action com.pocketchange.android.rewards.NOTIFY\_PENDING\_DISPLAY\_REWARD\_INTENT and data matching your application package's URI (i.e. package:&lt;your application package&gt;). To subscribe to these broadcasts, use the following intent filter:
-```xml
-<intent-filter>
-    <action android:name="com.pocketchange.android.rewards.NOTIFY_PENDING_DISPLAY_REWARD_INTENT" />
-    <data android:scheme="package" />
-</intent-filter>
-```
-
-Be sure to validate that the data field matches your application's package name, or you may end up responding to broadcasts intended for other applications. The following sample BroadcastReceiver automatically displays the next notification in the queue immediately upon receipt.
-
-```java
-package com.pocketchange.android.example;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-
-import com.pocketchange.android.PocketChange;
-
-public class PendingRewardDisplayReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (!PocketChange.isInitialized()) {
-            return;
-        }
-        String action = intent.getAction();
-        if (action == null || !action.equals(PocketChange.ACTION_NOTIFY_PENDING_DISPLAY_REWARD_INTENT)) {
-            return;
-        }
-        Uri data = intent.getData();
-        if (data == null
-            || !data.getScheme().equals("package")
-            || !data.getSchemeSpecificPart().equals(context.getPackageName())) {
-            return;
-        }
-        Intent displayRewardIntent = PocketChange.getDisplayRewardIntent();
-        if (displayRewardIntent != null) {
-            displayRewardIntent.addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK |
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-            );
-            context.startActivity(displayRewardIntent);
-        }
-    }
-}
-```
 
 ### Update Your ProGuard Configuration
 If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in sdk/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
@@ -157,7 +110,7 @@ and the SDK configuration contains:
 then the merged version should use the keep directive from the SDK configuration, as the SDK preserves all classes extending AnInterface, regardless of their visibility, whereas your application only preserves public classes implementing the interface.
 
 
-## <a name="testing"></a>Testing Instructions
+## <a name="testing"></a>Testing
 
 You can use test mode to validate your integration: The SDK will grant unlimited rewards so that you can confirm your application's behavior after a reward has been granted. To enable test mode, replace your initialize statement with:
 
@@ -168,6 +121,16 @@ PocketChange.initialize(this, APP_ID, true);
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
 The SDK only works properly on real devices. Do not use emulators for testing or you will get faulty test results.
+
+
+## <a name="upgrading"></a>Upgrading
+
+To upgrade from an earlier release of the SDK:
+
+1. Pull the latest version of the SDK code from GitHub.
+2. Refresh the SDK project in Eclipse (with the project selected, navigate to File » Refresh).
+3. Delete all of the previous SDK entries from your AndroidManifest.xml.
+4. Complete steps 5 and 6 of the integration instructions.
 
 
 [1]: http://www.eclipse.org/downloads/
