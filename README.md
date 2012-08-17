@@ -84,12 +84,13 @@ Do not attempt to guard against duplicate initialization, as doing so will break
 
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
-To retrieve an Intent that launches an Activity which displays the next pending notification, after invoking initialize, call:
+To retrieve an Intent for an Activity which displays the next pending notification, after invoking initialize, call the `PocketChange.getDisplayRewardIntent` method. This method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing Activity:
 ```java
-PocketChange.getDisplayRewardIntent();
+Intent rewardIntent = PocketChange.getDisplayRewardIntent();
+if (rewardIntent != null) {
+    startActivity(rewardIntent);
+}
 ```
-
-The `getDisplayRewardIntent` method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time.
 
 
 ### Update Your ProGuard Configuration
