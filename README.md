@@ -92,6 +92,10 @@ if (rewardIntent != null) {
 }
 ```
 
+### Adding a button to open the Pocket Change shop
+
+We encourage developers to add a Pocket Change button which will open our shop. Please use the assets [here][4]. The click event should be tied to
+`PocketChange.openShop`. Make sure you have called initialize before invoking this method.
 
 ### Update Your ProGuard Configuration
 If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in sdk/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
@@ -137,3 +141,4 @@ To upgrade from an earlier release of the SDK:
 [1]: http://www.eclipse.org/downloads/
 [2]: http://developer.android.com/sdk/index.html
 [3]: http://developer.android.com/sdk/eclipse-adt.html
+[4]: https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png
