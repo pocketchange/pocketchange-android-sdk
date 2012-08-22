@@ -92,10 +92,13 @@ if (rewardIntent != null) {
 }
 ```
 
-### Adding a button to open the Pocket Change shop
+### Adding a Button to Open the Pocket Change Shop (Optional)
 
-We encourage developers to add a Pocket Change button which will open our shop. Please use the assets [here][4]. The click event should be tied to
-`PocketChange.openShop`. Make sure you have called initialize before invoking this method.
+We encourage developers to add a Pocket Change button which will open our shop. Please use the assets [here][4]. When the user clicks the button,
+call:
+```java
+PocketChange.openShop();
+```
 
 ### Update Your ProGuard Configuration
 If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in sdk/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
