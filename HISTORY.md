@@ -1,3 +1,8 @@
+## 5.1.4 (2012-08-30)
+
+* Improved support for hardware acceleration
+* Made UI elements render transparently above the application
+
 ## 5.1.3 (2012-08-09)
 
 * Fixed intermittent AndroidRuntimeException caused by web view preloading

@@ -51,20 +51,41 @@ If your manifest file does not already include the permissions to connect to the
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 ```
 
-Finally, declare the application components the SDK requires inside of the &lt;application&gt; block:
+Finally, declare the application components the SDK requires inside of the &lt;application&gt; block. For applications targeting SDK versions 14 and higher (by setting minSdkVersion or targetSdkVersion &gt;= 14 in the uses-sdk element):
 
 ```xml
         <activity
             android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:hardwareAccelerated="false">
         </activity>
         <activity
             android:name="com.pocketchange.android.rewards.ShopActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:hardwareAccelerated="false">
+        </activity>
+
+        <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
+```
+
+When targeting these newer SDK version, you may also need to set your project's target (the target property in project.properties) to android-11 or higher, or the build tools will not recognize the android:hardwareAccelerated attribute.
+
+For applications not matching the aforementioned criterion:
+
+```xml
+        <activity
+            android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        </activity>
+        <activity
+            android:name="com.pocketchange.android.rewards.ShopActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         </activity>
         
         <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
 ```
+
+Only use one of the provided component declarations. If you're unsure which SDK version your application targets, try the manifest entries in the order listed; if the first set of entries causes build errors due to unrecognized XML elements, use the second set.
 
 ## Step 6: Integrate the SDK in your app
 
@@ -85,6 +106,7 @@ Do not attempt to guard against duplicate initialization, as doing so will break
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
 To retrieve an Intent for an Activity which displays the next pending notification, after invoking initialize, call the `PocketChange.getDisplayRewardIntent` method. This method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing Activity:
+
 ```java
 Intent rewardIntent = PocketChange.getDisplayRewardIntent();
 if (rewardIntent != null) {
@@ -92,15 +114,18 @@ if (rewardIntent != null) {
 }
 ```
 
-### Adding a Button to Open the Pocket Change Shop (Optional)
 
-We encourage developers to add a Pocket Change button which will open our shop. Please use the assets [here][4]. When the user clicks the button,
-call:
+### Add a Button to Open the Pocket Change Shop (Optional)
+
+We encourage developers to add a Pocket Change button which opens our shop. Please use the assets <a href="https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png">here</a>. When the user clicks the button, call:
+
 ```java
 PocketChange.openShop();
 ```
 
+
 ### Update Your ProGuard Configuration
+
 If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in sdk/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
 
 In cases where your application contains a conflicting or duplicate obfuscation setting, select the most permissive combination of settings. For example, if your proguard.cfg file contains:
@@ -141,7 +166,34 @@ To upgrade from an earlier release of the SDK:
 4. Complete steps 5 and 6 of the integration instructions.
 
 
+## <a name="command-line-build-instructions"></a>Building from the Command Line
+
+If you compile your application with the Android SDK Ant build scripts instead of Eclipse, you can use the Android SDK tools to automatically build the Pocket Change SDK and package it with your application. To update your build, instead of following steps 3-4, perform the following tasks.
+
+1. Ensure that your shell's search path (usually stored in the PATH environment variable) includes the Android SDK tools directory. To verify your configuration, execute:
+
+```sh
+android --help
+```
+
+from any directory, and you should see usage instructions for the Android tools.
+
+2. Generate a build file for the Pocket Change SDK library by executing the following command from the SDK's root directory:
+
+```sh
+android update lib-project --path sdk
+```
+
+3. Add the Pocket Change SDK to your project as a library dependency by executing the following command from your project's root directory:
+
+```sh
+android update project --path . --library <path to Pocket Change SDK>/sdk
+```
+
+For further information on adding libraries to your command-line build, see the [Android command-line tools reference][4].
+
+
 [1]: http://www.eclipse.org/downloads/
 [2]: http://developer.android.com/sdk/index.html
 [3]: http://developer.android.com/sdk/eclipse-adt.html
-[4]: https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png
+[4]: http://developer.android.com/tools/projects/projects-cmdline.html
