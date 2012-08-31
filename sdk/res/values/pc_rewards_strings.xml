@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pc_rewards_shop_loading">Loading...</string>
-    <string name="pc_rewards_shop_error_dialog_title">Error</string>
-    <string name="pc_rewards_shop_error_dialog_message">There was an error loading the shop. Typically, such errors occur due to network connectivity issues. Would you like to retry?</string>
-    <string name="pc_rewards_shop_error_dialog_retry_button">Retry</string>
-    <string name="pc_rewards_shop_error_dialog_cancel_button">Cancel</string>
-    
-    <string name="pc_rewards_display_reward_loading">Loading...</string>
-    <string name="pc_rewards_display_reward_error_dialog_title">Error</string>
-    <string name="pc_rewards_display_reward_error_dialog_message">There was an error loading the details about your recent rewards. Typically, such errors occur due to network connectivity issues. Would you like to retry?</string>
-    <string name="pc_rewards_display_reward_error_dialog_retry_button">Retry</string>
-    <string name="pc_rewards_display_reward_error_dialog_cancel_button">Cancel</string>
+    <string name="pc_rewards_loading">Loading...</string>
+    <string name="pc_rewards_error_dialog_title">Error</string>
+    <string name="pc_rewards_error_dialog_message">There was an error loading the content you requested. Typically, such errors occur due to network connectivity issues. Would you like to retry?</string>
+    <string name="pc_rewards_error_dialog_retry_button">Retry</string>
+    <string name="pc_rewards_error_dialog_cancel_button">Cancel</string>
 </resources>
