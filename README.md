@@ -173,23 +173,23 @@ If you compile your application with the Android SDK Ant build scripts instead o
 
 1. Ensure that your shell's search path (usually stored in the PATH environment variable) includes the Android SDK tools directory. To verify your configuration, execute:
 
-```sh
-android --help
-```
+    ```sh
+    android --help
+    ```
 
-from any directory, and you should see usage instructions for the Android tools.
+    from any directory, and you should see usage instructions for the Android tools.
 
 2. Generate a build file for the Pocket Change SDK library by executing the following command from the SDK's root directory:
 
-```sh
-android update lib-project --path sdk
-```
+    ```sh
+    android update lib-project --path sdk
+    ```
 
 3. Add the Pocket Change SDK to your project as a library dependency by executing the following command from your project's root directory:
 
-```sh
-android update project --path . --library <path to Pocket Change SDK>/sdk
-```
+    ```sh
+    android update project --path . --library <path to Pocket Change SDK>/sdk
+    ```
 
 For further information on adding libraries to your command-line build, see the [Android command-line tools reference][4].
 
