@@ -1,3 +1,11 @@
+## 5.1.6 (2012-09-05)
+
+* Added methods required to achieve visual parity between the Unity plugin and the SDK
+
+## 5.1.5 (2012-09-04)
+
+* Unified visual styles of rewards activities and added a background dimming effect to them
+
 ## 5.1.4 (2012-08-30)
 
 * Improved support for hardware acceleration
