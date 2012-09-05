@@ -73,16 +73,16 @@ When targeting these newer SDK version, you may also need to set your project's 
 For applications not matching the aforementioned criterion:
 
 ```xml
-<activity
-    android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-</activity>
-<activity
-    android:name="com.pocketchange.android.rewards.ShopActivity"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-</activity>
-
-<service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
+    <activity
+        android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+    </activity>
+    <activity
+        android:name="com.pocketchange.android.rewards.ShopActivity"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+    </activity>
+    
+    <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
 ```
 
 Only use one of the provided component declarations. If you're unsure which SDK version your application targets, try the manifest entries in the order listed; if the first set of entries causes build errors due to unrecognized XML elements, use the second set.
