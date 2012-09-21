@@ -1,3 +1,7 @@
+## 5.1.7 (2012-09-20)
+
+* Improved analytics reporting
+
 ## 5.1.6 (2012-09-05)
 
 * Added methods required to achieve visual parity between the Unity plugin and the SDK
