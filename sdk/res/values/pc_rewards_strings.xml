@@ -2,7 +2,11 @@
 <resources>
     <string name="pc_rewards_loading">Loading...</string>
     <string name="pc_rewards_error_dialog_title">Error</string>
-    <string name="pc_rewards_error_dialog_message">There was an error loading the content you requested. Typically, such errors occur due to network connectivity issues. Would you like to retry?</string>
+    <string name="pc_rewards_error_dialog_insufficient_memory_error_message">Your device does not have enough memory available to load the content you requested. Please close any unnecessary applications and try again.</string>
+    <string name="pc_rewards_error_dialog_webview_db_error_message">The system could not access its stored data. You may be able to resolve this problem by deleting unused content on your device.</string>
+    <string name="pc_rewards_error_dialog_internal_error_message">Your device encountered an internal error while loading the content you requested.</string>
+    <string name="pc_rewards_error_dialog_content_error_message">There was an error loading the content you requested. Typically, such errors occur due to network connectivity issues. Would you like to retry?</string>
     <string name="pc_rewards_error_dialog_retry_button">Retry</string>
     <string name="pc_rewards_error_dialog_cancel_button">Cancel</string>
+    
 </resources>
