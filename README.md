@@ -8,9 +8,9 @@ Prerequisites: [Eclipse][1], [Android SDK][2] (version 17 or later), and the [An
 
 **Note that version 17 of the Android SDK and Android Plugin were released in 03/2012; if you experience build errors, please ensure that you have appropriate versions of these components.**
 
-## Step 1: Obtain an id for your game
+## Step 1: Obtain an ID for your application
 
-In order to integrate the Pocket Change Android SDK, you must first obtain an APP_ID from your account manager. Each game will have a separate APP_ID.
+In order to integrate the Pocket Change Android SDK, you must first obtain an APP\_ID from your account manager. Each application will have a separate APP\_ID.
 
 ## Step 2: Download the SDK
 
@@ -62,22 +62,13 @@ Do not attempt to guard against duplicate initialization, as doing so will break
 
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
-To retrieve an Intent for an Activity which displays the next pending notification, after invoking initialize, call the `PocketChange.getDisplayRewardIntent` method. This method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing Activity:
+To retrieve an Intent for an Activity which displays the next pending notification, after invoking initialize, call the `PocketChange.getPendingNotificationIntent` method. This method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing Activity:
 
 ```java
-Intent rewardIntent = PocketChange.getDisplayRewardIntent();
-if (rewardIntent != null) {
-    startActivity(rewardIntent);
+Intent notificationIntent = PocketChange.getPendingNotificationIntent();
+if (notificationIntent != null) {
+    startActivity(notificationIntent);
 }
-```
-
-
-### Add a Button to Open the Pocket Change Shop (Optional)
-
-We encourage developers to add a Pocket Change button which opens our shop. Please use the assets <a href="https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png">here</a>. When the user clicks the button, call:
-
-```java
-PocketChange.openShop();
 ```
 
 

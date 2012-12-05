@@ -3,7 +3,6 @@
 If your manifest file does not already include the permissions to connect to the internet, access network state, obtain account information, and read telephony state, add them inside the &lt;manifest&gt; block. We only use account information for simplifying the login and purchasing flows. We only use telephone state in cases where the phone does not have a valid device ID.
 
 ```xml
-
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
@@ -14,7 +13,7 @@ Finally, declare the application components the SDK requires inside of the &lt;a
 
 ```xml
     <activity
-        android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
+        android:name="com.pocketchange.android.rewards.NotificationActivity"
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
         android:hardwareAccelerated="false">
     </activity>
@@ -23,6 +22,15 @@ Finally, declare the application components the SDK requires inside of the &lt;a
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
         android:hardwareAccelerated="false">
     </activity>
+
+    <receiver android:name="com.pocketchange.android.PackageDataReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+            <action android:name="android.intent.action.PACKAGE_REMOVED" />
+            <action android:name="android.intent.action.PACKAGE_REPLACED" />
+            <data android:scheme="package" /> 
+        </intent-filter>
+    </receiver>
     
     <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
 ```
@@ -33,13 +41,22 @@ For applications not matching the aforementioned criterion:
 
 ```xml
     <activity
-        android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
+        android:name="com.pocketchange.android.rewards.NotificationActivity"
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
     </activity>
     <activity
         android:name="com.pocketchange.android.rewards.ShopActivity"
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
     </activity>
+
+    <receiver android:name="com.pocketchange.android.PackageDataReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+            <action android:name="android.intent.action.PACKAGE_REMOVED" />
+            <action android:name="android.intent.action.PACKAGE_REPLACED" />
+            <data android:scheme="package" /> 
+        </intent-filter>
+    </receiver>
     
     <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
 ```

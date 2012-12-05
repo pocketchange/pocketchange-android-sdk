@@ -1,6 +1,10 @@
+## 6.0.0 (2012-12-04)
+
+* Updated notification UI and API
+
 ## 5.1.8 (2012-10-17)
 
-* Enhanced recovery logic and user-facing messaging for rare exceptions.
+* Enhanced recovery logic and user-facing messaging for rare exceptions
 
 ## 5.1.7 (2012-09-20)
 
