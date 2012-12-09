@@ -99,7 +99,7 @@ You can use test mode to validate your integration: The SDK will grant unlimited
 PocketChange.initialize(this, APP_ID, true);
 ```
 
-**You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
+**You must disable test mode before submiting your app for QA, a production build of an apk with test mode enabled will throw a fatal error.** (This ensures apks that are released to the Play Store do not point to our sandbox environment)
 
 The SDK only works properly on real devices. Do not use emulators for testing or you will get faulty test results.
 
