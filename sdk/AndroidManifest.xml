@@ -14,14 +14,23 @@
 
     <application>
         <activity
-            android:name="com.pocketchange.android.rewards.DisplayRewardActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:name="com.pocketchange.android.rewards.NotificationActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name="com.pocketchange.android.rewards.ShopActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         </activity>
-        
+
+        <receiver android:name="com.pocketchange.android.PackageDataReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" /> 
+            </intent-filter>
+        </receiver>
+
         <service android:name="com.pocketchange.android.http.AsyncHttpRequestService" />
     </application>
 </manifest>
