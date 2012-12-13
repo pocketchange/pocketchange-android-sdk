@@ -1,6 +1,6 @@
 # Pocket Change's Android SDK.
 
-If you're using Unity go <a href="https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin/blob/master/README.md">here</a>.
+If you're using Unity go <a href="https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin">here</a>.
 
 Follow the instructions below to integrate the SDK.
 
