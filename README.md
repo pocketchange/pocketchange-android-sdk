@@ -1,6 +1,6 @@
 # Pocket Change's Android SDK.
 
-If you're using Unity go <a data-href="unity" href="https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin">here</a>.
+If you're using Unity go <a data-href="/documentation/unity" href="https://github.com/pocketchange/pocketchange-android-sdk-unity-plugin">here</a>.
 
 Follow the instructions below to integrate the SDK.
 
@@ -42,7 +42,7 @@ Open the properties window for your app (File » Properties » Android), press t
 
 ## Step 5: Modify your AndroidManifest.xml
 
-In order to make the SDK components accessible to your application, follow the instructions in <a href="https://github.com/pocketchange/pocketchange-android-sdk/blob/master/README-AndroidManifest.md" target="_blank">"AndroidManifest.xml Entries for the Pocket Change SDK"</a>.
+In order to make the SDK components accessible to your application, follow the instructions in <a data-href="/documentation/android_manifest" href="https://github.com/pocketchange/pocketchange-android-sdk/blob/master/README-AndroidManifest.md" target="_blank">"AndroidManifest.xml Entries for the Pocket Change SDK"</a>.
 
 ## Step 6: Integrate the SDK in your app
 
