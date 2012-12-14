@@ -8,6 +8,8 @@ Prerequisites: [Eclipse][1], [Android SDK][2] (version 17 or later), and the [An
 
 **Note that version 17 of the Android SDK and Android Plugin were released in 03/2012; if you experience build errors, please ensure that you have appropriate versions of these components.**
 
+**You must disable test mode before submiting your app for QA, a production build of an apk with test mode enabled will throw a fatal error.** (This ensures apks that are released to the Play Store do not point to our sandbox environment)
+
 ## Step 1: Obtain an ID for your application
 
 In order to integrate the Pocket Change Android SDK, you must first obtain an APP\_ID from your account manager. Each application will have a separate APP\_ID.
