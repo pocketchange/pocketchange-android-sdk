@@ -54,7 +54,7 @@ First import the Pocket Change SDK in your Activity subclasses:
 import com.pocketchange.android.PocketChange;
 ```
 
-Next initialize the SDK in the very very beginning of each Activity's onStart() method:
+Next initialize the SDK in the very very beginning of each Activity's onStart() method: **These calls must be in onStart(), they can not be placed in onCreate()**
 
 ```java
 PocketChange.initialize(this, APP_ID);
