@@ -1,3 +1,9 @@
+## 6.0.1 (2013-04-02)
+
+* Added a work-around for an Android API bug manifesting itself as a never-ending "Loading" spinner in certain activities
+* Improved the performance of UI components
+* Reduced the SDK's maximum resource requirements
+
 ## 6.0.0 (2012-12-04)
 
 * Updated notification UI and API
