@@ -97,7 +97,54 @@ Next ensure that you are displaying the queued notifications at a spot that make
         startActivity(notificationIntent);
       }
  
-### Update Your ProGuard Configuration
+## Step 8: Add Loyalty Rewards
+### Loyalty Rewards Data Flow
+When the SDK detects that a user has completed a transaction for loyalty rewards available in your application, it sends a broadcast, local to your application, indicating the presence of new data. Your application should respond to this broadcast by updating the user's item inventory with the data provided by the SDK.
+
+In certain cases, the SDK may send repeated broadcasts for the same transaction. These repeated broadcasts comprise part of the delivery retry mechanism, and do not indicate a malfunction. In case of a duplicate broadcast, the item inventory returned by the SDK will not contain any duplicate data. Because your inventory management system should simply update all product quantities using the most recent data provided by the SDK, duplicate broadcasts should not affect your inventory logic.
+
+### Requirements
+In order to setup loyalty rewards you must have a SKU for each loyalty reward you are offering, this is provided by Pocket Change with your integration info.  Contact your sales representative if you have any questions.
+
+### Add the Loyalty Rewards Components to your AndroidManifest.xml
+Add the following entry to your AndroidManifest.xml:
+
+        <receiver android:name="com.pocketchange.android.ProductTransactionsReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACTION" />
+            </intent-filter>
+        </receiver>
+
+### Subscribe to Transaction Broadcasts
+In order to receive broadcasts when users purchase loyalty rewards available in your application, you must register a receiver in your application's manifest with the following intent filter.
+
+        <intent-filter>
+            <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACT        ION" />
+        </intent-filter>
+    
+Dynamically registered receivers (receivers registered via the `android.content.Context.registerReceiver` method) will not receive transaction broadcasts, as only recent versions of Android permit sending local broadcasts to dynamically registered receivers.
+
+The manifest entry for your receiver should include the `android:exported="false"` attribute to ensure that external applications cannot access it.
+
+In your BroadcastReceiver implementation, you should, depending on your application's design, either synchronously update the user's item inventory or, if updates involve blocking operations, queue an asynchronous update. To access the user's current inventory, after initializing the SDK by invoking the `com.pocketchange.android.PocketChange.initialize` method, you can use the following non-blocking, static SDK methods located in the `com.pocketchange.android.PocketChange` class.
+
+**boolean hasPurchasedProduct(String sku)**
+Returns true if the user has purchased the product identified by `sku`, false otherwise. This method exists primarily as a convenience for identifying purchases of single-quantity, non-consumable items, such as level packs.
+
+**int getQuantityPurchasedForProduct(String sku)**
+Returns the total quantity purchased for the product identified by `sku`. You can use this method to create a complete item inventory by iterating over each SKU in your game.
+
+If you fail to call the `PocketChange.initialize` method before invoking any of the aforementioned methods, the SDK may throw an exception.
+
+Note that the SDK does not track item usage. Instead, your application must maintain a record of item debits and obtain current balances by computing the difference between credits (aggregated from all vendors selling your goods) and debits. This design permits you to accept purchases from any number of sources, such as the Google Play store, the Pocket Change shop, and third party web storefronts.
+
+### Synchronize Your Item Inventory with the SDK's Inventory
+
+To account for failures in your broadcast receiver implementation (for example, the device losing power during execution of your onReceive method), your application should periodically synchronize its item inventories with the inventories provided by the SDK. You can cover such abnormal scenarios by initiating a synchronization in the onCreate method of your application's main activities (activities matching the intent filter `<action android:name="android.intent.action.MAIN" />`).
+
+You should be able to reuse the logic from your receiver to implement periodic synchronizations, as in both cases the SDK provides the same query interface.
+
+## Update Your ProGuard Configuration
 
 If you use ProGuard to obfuscate your application's source code, you must update your configuration or the application will either fail to build or malfunction. You can find the configuration the SDK requires in sdk/proguard.cfg. Merge this configuration into your application's proguard.cfg file, and your application should build and function correctly.
 
@@ -124,7 +171,7 @@ You can use test mode to validate your integration: The SDK will grant unlimited
 PocketChange.initialize(this, APP_ID, true);
 ```
 
-**You must disable test mode before submiting your app for QA, a production build of an apk with test mode enabled will throw a fatal error.** (This ensures apks that are released to the Play Store do not point to our sandbox environment)
+**You must disable test mode before submiting your app for review, a production build of an apk with test mode enabled will throw a fatal error.** (This ensures apks that are released to the Play Store do not point to our sandbox environment)
 
 The SDK only works properly on real devices. Do not use emulators for testing or you will get faulty test results.
 
