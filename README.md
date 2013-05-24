@@ -212,6 +212,11 @@ If you compile your application with the Android SDK Ant build scripts instead o
 
 For further information on adding libraries to your command-line build, see the [Android command-line tools reference][4].
 
+## Known Issues
+### Link errors (ClassNotFoundException) with ADT 22
+There is a bug in the latest release of Android Developer Tools that can result in a ClassNotFoundException error when attempting to build your project after upgrading to ADT 22.  This issue should be resolved when ADT 22.0.1 is released.  Full details of the issue are available here: https://code.google.com/p/android/issues/detail?id=55304
+
+To work around this issue, go to Properties->Order and export on the app project and check 'Android Private Libraries'.
 
 [1]: http://www.eclipse.org/downloads/
 [2]: http://developer.android.com/sdk/index.html
