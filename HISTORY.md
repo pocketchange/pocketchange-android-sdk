@@ -1,3 +1,8 @@
+## 6.0.2 (2013-06-03)
+
+* Made the default notification background fully transparent
+* Fixed rare NullPointerExceptions in the com.pocketchange.android.PCSingleton class
+
 ## 6.0.1 (2013-04-02)
 
 * Added a work-around for an Android API bug manifesting itself as a never-ending "Loading" spinner in certain activities
