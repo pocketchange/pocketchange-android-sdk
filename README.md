@@ -75,9 +75,13 @@ if (notificationIntent != null) {
     startActivity(notificationIntent);
 }
 ```
+## Step 7: Add Shop Button
 
+Please use the assets <a href='https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png'>here</a>. When the user clicks the button, call:
 
-## Step 7: Add Event-Based Rewards
+    PocketChange.openShop();
+
+## Step 8: Add Event-Based Rewards
 In order to include your events in the reward system, you must provide your sales representative with a listing of the events you want to offer.
 
 In order to make the SDK respond to your event-based rewards you must trigger the reward in your code as soon as the "event" occurs. You use the following method to specify that the identified reward should be granted to the user. <b>Until your application goes live with events this code will not fire off an event if the application isn't in test mode.</b>
@@ -97,7 +101,7 @@ Next ensure that you are displaying the queued notifications at a spot that make
         startActivity(notificationIntent);
       }
  
-## Step 8: Add Loyalty Rewards
+## Step 9: Add Loyalty Rewards
 ### Loyalty Rewards Data Flow
 When the SDK detects that a user has completed a transaction for loyalty rewards available in your application, it sends a broadcast, local to your application, indicating the presence of new data. Your application should respond to this broadcast by updating the user's item inventory with the data provided by the SDK.
 
