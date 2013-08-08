@@ -1,3 +1,7 @@
+## 6.0.4 (2013-08-08)
+
+* Fixed implementation of visual components required by the Unity plugin
+
 ## 6.0.3 (2013-08-07)
 
 * Made core functionality contingent on the user opting in
