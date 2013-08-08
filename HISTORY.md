@@ -1,3 +1,8 @@
+## 6.0.3 (2013-08-07)
+
+* Made core functionality contingent on the user opting in
+* Eliminated the android.permission.GET_ACCOUNTS permission requirement
+
 ## 6.0.2 (2013-06-03)
 
 * Made the default notification background fully transparent

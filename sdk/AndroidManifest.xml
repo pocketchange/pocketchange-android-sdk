@@ -7,12 +7,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.pocketchange.android">
     <uses-sdk android:minSdkVersion="7" />
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
     <application>
+        <activity
+            android:name="com.pocketchange.android.optin.NativeOptInActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        </activity>
+        <activity
+            android:name="com.pocketchange.android.optin.WebViewOptInActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        </activity>
         <activity
             android:name="com.pocketchange.android.rewards.NotificationActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
