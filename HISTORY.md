@@ -1,3 +1,7 @@
+## 6.0.5 (2013-08-09)
+
+* Added a work-around for an Android API bug occasionally causing the exception: "java.lang.IllegalArgumentException: Service not registered: android.speech.tts.TextToSpeech..."
+
 ## 6.0.4 (2013-08-08)
 
 * Fixed implementation of visual components required by the Unity plugin
