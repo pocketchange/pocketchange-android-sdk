@@ -10,9 +10,9 @@ Prerequisites: [Eclipse][1], [Android SDK][2] (version 17 or later), and the [An
 
 **You must disable test mode before submiting your app for QA, a production build of an apk with test mode enabled will throw a fatal error.** (This ensures apks that are released to the Play Store do not point to our sandbox environment)
 
-## Step 1: Obtain an ID for your application
+## Step 1: Obtain an API Key for Your Application
 
-In order to integrate the Pocket Change Android SDK, you must first obtain an APP\_ID from your account manager. Each application will have a separate APP\_ID.
+In order to integrate the Pocket Change Android SDK, you must first obtain an API key (formerly referred to as an "App ID") from your account manager. Each application will have a separate key.
 
 ## Step 2: Download the SDK
 
@@ -46,28 +46,66 @@ Open the properties window for your app (File » Properties » Android), press t
 
 In order to make the SDK components accessible to your application, follow the instructions in <a data-href="/documentation/android_manifest" href="https://github.com/pocketchange/pocketchange-android-sdk/blob/master/README-AndroidManifest.md" target="_blank">"AndroidManifest.xml Entries for the Pocket Change SDK"</a>.
 
-## Step 6: Integrate the SDK in your app
+## Step 6: Integrate the SDK code
 
-First import the Pocket Change SDK in your Activity subclasses:
+Follow these instructions exactly as written, paying close attention to the placement of SDK calls in activity lifecycle methods. **If an SDK method invocation appears within an activity lifecycle method (one of `onCreate`, `onStart`, `onResume`, `onPause`, `onStop`, or `onDestroy`) in the documentation, do not attempt to call it from a different method.**
+
+First, import the Pocket Change SDK in your `android.app.Activity` subclasses:
 
 ```java
 import com.pocketchange.android.PocketChange;
 ```
 
-**These calls must be in onStart(), they should not be placed in onCreate()**
-
-Next initialize the SDK in the very very beginning of each Activity's onStart() method: 
+Next, initialize the SDK as the first statement in your activity's `onStart` method: 
 
 ```java
-PocketChange.initialize(this, APP_ID);
+protected void onStart() {
+   PocketChange.initialize(this, API_KEY);
+   ...
+}
 ```
-
 
 Do not attempt to guard against duplicate initialization, as doing so will break your integration.
 
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
-To retrieve an Intent for an Activity which displays the next pending notification, at the end of the onStart() method, call the `PocketChange.getPendingNotificationIntent` method. This method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing Activity:
+To retrieve an `Intent` for an activity which displays the next pending notification, at the end of the `onStart` method, call the `PocketChange.getPendingNotificationIntent` method. This method returns `null` if you should not display any notification; always check for a `null` return value, as intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing activity:
+
+```java
+protected void onStart() {
+  ...
+  Intent notificationIntent = PocketChange.getPendingNotificationIntent();
+  if (notificationIntent != null) {
+      startActivity(notificationIntent);
+  }
+}
+```
+
+## Step 7: Add a Shop Button
+
+Please use the assets <a href="https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png">here</a>. When a user clicks the button, call:
+
+```java
+PocketChange.openShop();
+```
+
+## Step 8: Add Event-Based Rewards
+
+In order to reward users based on events specific to your application, you must provide your sales representative with a listing of events. Once your representative has configured the events, you can start testing the related functionality in your application.
+
+As soon as an event occurs, invoke the following method:
+
+```java
+void grantReward(String referenceID, int amount)
+```
+
+This method informs the SDK that the event with the provided `referenceID` occurred `amount` times. Typically, `amount` should be 1; a value greater than 1 indicates multiple occurrences of the event. **Until your application goes live with events, this method will only have an effect in test mode.**
+
+Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
+
+Please ensure the call to `getPendingNotficationIntent` does not immediately follow the call to `grantReward` or `initalize`, these methods require a small delay in which to validate the rewards with our servers before the application can display them.
+
+Next ensure that you are displaying the queued notifications at a spot that makes sense for you app (i.e. in a level-based game at the end of each level displaying pending rewards makes sense). After invoking initialize, call the `getPendingNotificationIntent` method to display any rewards accumulated since the last call to this method. This method returns `null` if you should not display any notification; always check for a `null` return value, as intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing activity:
 
 ```java
 Intent notificationIntent = PocketChange.getPendingNotificationIntent();
@@ -75,33 +113,9 @@ if (notificationIntent != null) {
     startActivity(notificationIntent);
 }
 ```
-## Step 7: Add Shop Button
 
-Please use the assets <a href='https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png'>here</a>. When the user clicks the button, call:
-
-    PocketChange.openShop();
-
-## Step 8: Add Event-Based Rewards
-In order to include your events in the reward system, you must provide your sales representative with a listing of the events you want to offer.
-
-In order to make the SDK respond to your event-based rewards you must trigger the reward in your code as soon as the "event" occurs. You use the following method to specify that the identified reward should be granted to the user. <b>Until your application goes live with events this code will not fire off an event if the application isn't in test mode.</b>
-
-        void grantReward(String referenceID, int amount)
-
-This method informs the SDK that an event with the specified reference ID has been completed by the user a certain number of times. Generally the "amount" will be 1 unless they've incured more then one event reward with the same reference ID.
-
-Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
-
-Please ensure the call to getPendingNotficationIntent() does not immediately follow the call to grantReward() or initalize(), these functions require a small delay in which to validate the rewards with our servers before the application can display them.
-
-Next ensure that you are displaying the queued notifications at a spot that makes sense for you app (i.e. in a level-based game at the end of each level displaying pending rewards makes sense). After invoking initialize, call the `PocketChange.getPendingNotificationIntent` method to display any rewards accumulated since the last call to this method. This method returns null if you should not display any notification; always check for a null return value, as Intents may be removed from the queue automatically at any time. The following code launches the next pending notification from an existing Activity:
-
-      Intent notificationIntent = PocketChange.getPendingNotificationIntent();
-      if (notificationIntent != null) {
-        startActivity(notificationIntent);
-      }
- 
 ## Step 9: Add Loyalty Rewards
+
 ### Loyalty Rewards Data Flow
 When the SDK detects that a user has completed a transaction for loyalty rewards available in your application, it sends a broadcast, local to your application, indicating the presence of new data. Your application should respond to this broadcast by updating the user's item inventory with the data provided by the SDK.
 
@@ -113,24 +127,28 @@ In order to setup loyalty rewards you must have a SKU for each loyalty reward yo
 ### Add the Loyalty Rewards Components to your AndroidManifest.xml
 Add the following entry to your AndroidManifest.xml:
 
-        <receiver android:name="com.pocketchange.android.ProductTransactionsReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACTION" />
-            </intent-filter>
-        </receiver>
+```xml
+<receiver android:name="com.pocketchange.android.ProductTransactionsReceiver" android:exported="false">
+    <intent-filter>
+        <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACTION" />
+    </intent-filter>
+</receiver>
+```
 
 ### Subscribe to Transaction Broadcasts
 In order to receive broadcasts when users purchase loyalty rewards available in your application, you must register a receiver in your application's manifest with the following intent filter.
 
-        <intent-filter>
-            <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACT        ION" />
-        </intent-filter>
-    
+```xml
+<intent-filter>
+    <action android:name="com.pocketchange.android.rewards.NOTIFY_PRODUCT_TRANSACTION" />
+</intent-filter>
+```
+
 Dynamically registered receivers (receivers registered via the `android.content.Context.registerReceiver` method) will not receive transaction broadcasts, as only recent versions of Android permit sending local broadcasts to dynamically registered receivers.
 
 The manifest entry for your receiver should include the `android:exported="false"` attribute to ensure that external applications cannot access it.
 
-In your BroadcastReceiver implementation, you should, depending on your application's design, either synchronously update the user's item inventory or, if updates involve blocking operations, queue an asynchronous update. To access the user's current inventory, after initializing the SDK by invoking the `com.pocketchange.android.PocketChange.initialize` method, you can use the following non-blocking, static SDK methods located in the `com.pocketchange.android.PocketChange` class.
+In your `BroadcastReceiver` implementation, you should, depending on your application's design, either synchronously update the user's item inventory or, if updates involve blocking operations, queue an asynchronous update. To access the user's current inventory, after initializing the SDK by invoking the `com.pocketchange.android.PocketChange.initialize` method, you can use the following non-blocking, static SDK methods located in the `com.pocketchange.android.PocketChange` class.
 
 **boolean hasPurchasedProduct(String sku)**
 Returns true if the user has purchased the product identified by `sku`, false otherwise. This method exists primarily as a convenience for identifying purchases of single-quantity, non-consumable items, such as level packs.
@@ -172,10 +190,12 @@ then the merged version should use the keep directive from the SDK configuration
 You can use test mode to validate your integration: The SDK will grant unlimited rewards so that you can confirm your application's behavior after a reward has been granted. To enable test mode, replace your initialize statement with:
 
 ```java
-PocketChange.initialize(this, APP_ID, true);
+PocketChange.initialize(this, API_KEY, true);
 ```
 
-**You must disable test mode before submiting your app for review, a production build of an apk with test mode enabled will throw a fatal error.** (This ensures apks that are released to the Play Store do not point to our sandbox environment)
+Each time you switch between production and test modes, you must uninstall the application to ensure correct behavior.
+
+**Disable test mode before submiting your app for review.**; Production builds of APKs in test mode throw fatal errors upon initialization in order to guard against accidental releases of test builds to marketplaces such as Google Play.
 
 The SDK only works properly on real devices. Do not use emulators for testing or you will get faulty test results.
 
