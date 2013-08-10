@@ -56,7 +56,7 @@ First, import the Pocket Change SDK in your `android.app.Activity` subclasses:
 import com.pocketchange.android.PocketChange;
 ```
 
-Next, initialize the SDK as the first statement in your activity's `onStart` method: 
+Next, initialize the SDK as the first statement in each activity's `onStart` method: 
 
 ```java
 protected void onStart() {
@@ -195,7 +195,7 @@ PocketChange.initialize(this, API_KEY, true);
 
 Each time you switch between production and test modes, you must uninstall the application to ensure correct behavior.
 
-**Disable test mode before submiting your app for review.**; Production builds of APKs in test mode throw fatal errors upon initialization in order to guard against accidental releases of test builds to marketplaces such as Google Play.
+**Disable test mode before submiting your app for review.** Production builds of APKs in test mode throw fatal errors upon initialization in order to guard against accidental releases of test builds to marketplaces such as Google Play.
 
 The SDK only works properly on real devices. Do not use emulators for testing or you will get faulty test results.
 
