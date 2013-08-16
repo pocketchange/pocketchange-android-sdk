@@ -1,3 +1,7 @@
+## 6.0.6 (2013-08-15)
+
+* Fixed a bug causing deletion of stored, pending rewards for opted-in users on application launch
+
 ## 6.0.5 (2013-08-09)
 
 * Added a work-around for an Android API bug occasionally causing the exception: "java.lang.IllegalArgumentException: Service not registered: android.speech.tts.TextToSpeech..."
